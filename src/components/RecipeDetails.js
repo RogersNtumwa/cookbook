@@ -24,10 +24,10 @@ const RecipeDetails = ({ match }) => {
             {recipe.name}
           </Typography>
           <Typography className={pos} color="textSecondary">
-            {recipe.author}
+            By: {recipe.author}
           </Typography>
           <Typography variant="body2" component="p">
-            {recipe.description}
+            Desc: {recipe.description}
           </Typography>
         </CardContent>
       </Card>
