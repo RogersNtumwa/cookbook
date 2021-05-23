@@ -36,6 +36,14 @@ class Firebase {
     const recipeDeatils = recipe.data();
     return recipeDeatils;
   }
+
+  async addRecipe(formData) {
+    const recipe = await firebase
+      .firestore()
+      .collection("receipe")
+      .add(formData);
+    return recipe;
+  }
 }
 
 export default new Firebase();

@@ -26,3 +26,9 @@ export const listheader = css`
   font-size: 1.5rem;
   text-align: center;
 `;
+
+export const paperStyle = css`
+  padding: "30px 20px",
+  width: "300",
+  margin: "20px auto",
+`;

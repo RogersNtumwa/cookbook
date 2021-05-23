@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { Button, List, ListItem, ListItemText } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +27,11 @@ const Recipes = () => {
           </ListItem>
         ))}
       </List>
+      <Link to="/addRecipe">
+        <Button variant="contained" color="primary">
+          Add Recipe
+        </Button>
+      </Link>
     </Fragment>
   );
 };

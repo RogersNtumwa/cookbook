@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import AddRecipe from "./AddRecipe";
 import RecipeDetails from "./RecipeDetails";
 import Recipes from "./Recipes";
 import { header, rootMain } from "./recipeStyle";
@@ -19,6 +20,7 @@ const Main = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Switch>
+            <Route path={`/addRecipe`} component={AddRecipe} exact />
             <Route path={`/recipe/:id`} component={RecipeDetails} exact />
           </Switch>
         </Grid>

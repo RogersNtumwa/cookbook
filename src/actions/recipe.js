@@ -6,6 +6,9 @@ import {
   RECIPE_DETAILS_SUCCESS,
   RECIPE_DETAILS_REQUEST,
   RECIPE_DETAILS_FAIL,
+  ADD_RECIPE_REQUEST,
+  ADD_RECIPE_SUCCESS,
+  ADD_RECIPE_FAIL,
 } from "./type";
 
 export const getRecipes = () => async (dispatch) => {
@@ -36,6 +39,22 @@ export const getRecipe = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: RECIPE_DETAILS_FAIL,
+    });
+  }
+};
+
+export const addRecipe = (formData) => async (dispatch) => {
+  dispatch({ type: ADD_RECIPE_REQUEST });
+  try {
+    const response = await Firebase.addRecipe(formData);
+
+    dispatch({
+      type: ADD_RECIPE_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_RECIPE_FAIL,
     });
   }
 };
