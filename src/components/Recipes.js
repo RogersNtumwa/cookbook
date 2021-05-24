@@ -13,7 +13,7 @@ const Recipes = () => {
 
   useEffect(() => {
     dispatch(getRecipes());
-  }, [dispatch]);
+  }, [dispatch, data]);
 
   return (
     <Fragment>
@@ -29,7 +29,7 @@ const Recipes = () => {
       </List>
       <Link to="/addRecipe">
         <Button variant="contained" color="primary">
-          Add Recipe
+          Add New Recipe
         </Button>
       </Link>
     </Fragment>

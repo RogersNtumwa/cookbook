@@ -27,8 +27,8 @@ export const listheader = css`
   text-align: center;
 `;
 
-export const paperStyle = css`
+export const paperStyle = css({
   padding: "30px 20px",
   width: "300",
   margin: "20px auto",
-`;
+});

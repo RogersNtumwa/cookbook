@@ -4,6 +4,7 @@ import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import { addRecipe } from "../actions/recipe";
+import { paperStyle } from "./recipeStyle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,12 +13,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const paperStyle = {
-  padding: "30px 20px",
-  width: "300",
-  margin: "20px auto",
-};
 
 const AddRecipe = () => {
   const classes = useStyles();
@@ -36,7 +31,9 @@ const AddRecipe = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     dispatch(addRecipe(formData));
+
     setformData({
       name: "",
       author: "",
@@ -46,7 +43,7 @@ const AddRecipe = () => {
 
   return (
     <Grid>
-      <Paper elevation={10} style={paperStyle}>
+      <Paper elevation={10} className={paperStyle}>
         <Grid align="center">
           <h2>Add Recipe</h2>
         </Grid>
