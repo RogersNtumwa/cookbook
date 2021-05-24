@@ -31,14 +31,15 @@ const AddRecipe = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (name.length > 0) {
+      dispatch(addRecipe(formData));
 
-    dispatch(addRecipe(formData));
-
-    setformData({
-      name: "",
-      author: "",
-      description: "",
-    });
+      setformData({
+        name: "",
+        author: "",
+        description: "",
+      });
+    }
   };
 
   return (

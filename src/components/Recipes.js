@@ -13,7 +13,7 @@ const Recipes = () => {
 
   useEffect(() => {
     dispatch(getRecipes());
-  }, [dispatch, data]);
+  }, [dispatch]);
 
   return (
     <Fragment>
