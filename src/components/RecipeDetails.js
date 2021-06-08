@@ -9,7 +9,7 @@ import { getRecipe } from "../Reducers/recipe";
 const RecipeDetails = ({ match }) => {
   const recipe = useSelector((state) => getRecipe(state, match.params.id));
   const { data } = recipe;
-  debugger;
+
   return (
     <Fragment>
       <p className={listheader}>Recipe Details</p>
