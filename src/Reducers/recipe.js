@@ -92,3 +92,7 @@ export const addRecipeReducer = (
       return state;
   }
 };
+
+export const getRecipe = (state, id) => {
+  return state.recipes.recipes.find((recipe) => recipe.id === id);
+};

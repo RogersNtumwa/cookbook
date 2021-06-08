@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getRecipes } from "../actions/recipe";
 import { headerText, listheader } from "./recipeStyle";
+import styled from "@emotion/styled";
+const Addbutton = styled(Link)({
+  textDecoration: "none",
+});
 
 const Recipes = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes);
-  const { recipes: data } = recipes;
+  const data = useSelector((state) => state.recipes.recipes);
 
   useEffect(() => {
     dispatch(getRecipes());
@@ -27,11 +30,11 @@ const Recipes = () => {
           </ListItem>
         ))}
       </List>
-      <Link to="/addRecipe">
+      <Addbutton to="/addRecipe">
         <Button variant="contained" color="primary">
           Add New Recipe
         </Button>
-      </Link>
+      </Addbutton>
     </Fragment>
   );
 };

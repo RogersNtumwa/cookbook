@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "@emotion/styled";
 
 import { addRecipe } from "../actions/recipe";
-import { paperStyle } from "./recipeStyle";
+import Progress from "./Progress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const StyledPaper = styled(Paper)({
+  padding: "30px 20px",
+  width: "300",
+  margin: "20px auto",
+});
+
 const AddRecipe = () => {
   const classes = useStyles();
   const [formData, setformData] = useState({
@@ -21,42 +28,77 @@ const AddRecipe = () => {
     author: "",
     description: "",
   });
+
+  const [Errors, setErrors] = useState({});
   const { name, author, description } = formData;
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [activeBtn, setActiveBtn] = useState(false);
+  const validateOnChange = true;
 
-  const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    setformData({ ...formData, [event.target.name]: event.target.value });
+  const validate = (fieldValues = formData) => {
+    const test = { ...Errors };
+    if ("name" in fieldValues) {
+      test.name = name ? "" : "Recipe name is required";
+    }
+    if ("author" in fieldValues)
+      test.author = author ? "" : "Author is required";
+    if ("description" in fieldValues)
+      test.description = description ? "" : "Description is required";
+    setErrors({ ...test });
+    if (fieldValues === formData)
+      return Object.values(test).every((x) => x === "");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (name.length > 0) {
-      dispatch(addRecipe(formData));
-
+  const { loading } = useSelector((state) => state.addRecipe);
+  useEffect(() => {
+    if (!loading) {
+      setShowSpinner(false);
       setformData({
         name: "",
         author: "",
         description: "",
       });
+      setActiveBtn(false);
+    }
+  }, [loading]);
+
+  const dispatch = useDispatch();
+
+  const handleChange = (event) => {
+    setformData({ ...formData, [event.target.name]: event.target.value });
+    if (validateOnChange) {
+      validate({ [event.target.name]: event.target.value });
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validate()) {
+      setShowSpinner(true);
+      setActiveBtn(true);
+      dispatch(addRecipe(formData));
+    } else {
+      console.log(Errors);
     }
   };
 
   return (
     <Grid>
-      <Paper elevation={10} className={paperStyle}>
+      <StyledPaper elevation={10}>
         <Grid align="center">
           <h2>Add Recipe</h2>
         </Grid>
         <form className={classes.root} onSubmit={handleSubmit}>
           <TextField
-            label="Recipe Name"
+            label="Recipe name"
             fullWidth
             placeholder="Enter recipe title"
             name="name"
             value={name}
             autoComplete="off"
             onChange={handleChange}
+            {...(Errors.name && { error: true, helperText: Errors.name })}
+            autoFocus={true}
           />
           <TextField
             label="Author"
@@ -66,6 +108,7 @@ const AddRecipe = () => {
             value={author}
             autoComplete="off"
             onChange={handleChange}
+            {...(Errors.author && { error: true, helperText: Errors.author })}
           />
           <TextField
             label="Description"
@@ -75,12 +118,24 @@ const AddRecipe = () => {
             value={description}
             autoComplete="off"
             onChange={handleChange}
+            multiline={true}
+            rows="4"
+            {...(Errors.description && {
+              error: true,
+              helperText: Errors.description,
+            })}
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={activeBtn}
+          >
             Add Recipe
           </Button>
+          {showSpinner && <Progress />}
         </form>
-      </Paper>
+      </StyledPaper>
     </Grid>
   );
 };

@@ -1,5 +1,4 @@
 import { css } from "@emotion/css";
-
 export const rootMain = css`
   minwidth: 275;
 `;
