@@ -33,12 +33,32 @@ const ActionButton = styled(Button)({
   color: "#fff",
 });
 
+const Pricing = styled(Typography)({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: "0",
+});
+
+const Prepaid = styled.span({
+  fontSize: ".7rem",
+  fontFamily: "sans-serif",
+});
+
+const ContentHead = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
+const ListChild = styled(ListItem)({ padding: "2px" });
+
 const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "column",
     positionL: "relative",
     minWidth: 275,
+    maxWidth: "10rem",
     marginRight: "10px",
     minHeight: "150px",
     padding: "10px",
@@ -59,28 +79,38 @@ const useStyles = makeStyles({
   },
 });
 
-const PlanCard = ({ data, type }) => {
+const PlanCard = ({ data, type, timeout }) => {
   const classes = useStyles();
   const price = data.prices.find((price) => price.interval === type);
 
   const Descriptin_List = data.description.split(",");
 
   return (
-    <Grow in={true} timeout={700}>
+    <Grow in={true} timeout={timeout}>
       <Card className={classes.root} elevation={10}>
-        <CardHeader title={data.name} />
+        <CardHeader title={data.name} style={{ textAlign: "center" }} />
         <CardContent>
-          <Typography className={classes.pos} color="textSecondary">
-            <Currency>{price.currency}</Currency>
-            <Price>{price.unit_amount}</Price>/
-            <span style={{ translate: "" }}>{type}</span>
-          </Typography>
+          <ContentHead>
+            <Pricing component="div">
+              <Currency>{price.currency}</Currency>
+              <Price>{price.unit_amount}</Price>/<span>{type}</span>
+            </Pricing>
+            <Prepaid>
+              {type === "month" ? (
+                <span>"aed {price.unit_amount * 12} Pre-Paid Yearly"</span>
+              ) : (
+                <span>
+                  "aed {Math.ceil(price.unit_amount / 12)} Pre-Paid Monthly"
+                </span>
+              )}
+            </Prepaid>
+          </ContentHead>
           <List>
             {Descriptin_List.map((item, index) => (
-              <ListItem key={index}>
+              <ListChild key={index} style={{ padding: "2px" }}>
                 <CheckIcon />
                 <ListItemText primary={item} />
-              </ListItem>
+              </ListChild>
             ))}
           </List>
         </CardContent>

@@ -9,8 +9,6 @@ const StyledGrid = styled(Grid)({
   width: "100%",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "#343740",
-  color: "#fff",
 });
 const HeaderText = styled(Grid)({
   textAlign: "center",

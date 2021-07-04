@@ -4,10 +4,11 @@ import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import styled from "@emotion/styled";
 
 import switcContext from "../context/swicthcontext";
 import { SWITCHPLAN } from "../context/Types";
-import styled from "@emotion/styled";
 
 const AntSwitch = withStyles((theme) => ({
   root: {
@@ -48,24 +49,26 @@ const MonthlyPlan = styled(Grid)((props) => ({
   fontSize: props.month && "20px",
   color: props.month && "#9557c9",
   fontWeight: props.month && "400",
+  cursor: "pointer",
 }));
 
 const YearPlan = styled(Grid)((props) => ({
   fontSize: props.year && "20px",
   color: props.year && "#9557c9",
   fontWeight: props.month && "400",
+  cursor: "pointer",
 }));
 
-const FormSwitch = styled(FormGroup)({
-  alignSelf: "flex-start",
-  padding: "0 10rem",
+const FormSwitch = styled(FormGroup)((props) => ({
+  alignSelf: "center",
   height: "2rem",
-});
+}));
 
 const SwitchBtn = () => {
   const { switchStata, dispatch, type } = useContext(switcContext);
+  const theme = useTheme();
   return (
-    <FormSwitch>
+    <FormSwitch theme={theme}>
       <Typography component="div">
         <Grid component="label" container alignItems="center" spacing={1}>
           <Grid item>

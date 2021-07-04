@@ -27,8 +27,13 @@ const Plans = () => {
     <PlanContainer>
       <Switch />
       <ProductGrid>
-        {data.map((product) => (
-          <PlanCard key={product.id} data={product} type={type} />
+        {data.map((product, index) => (
+          <PlanCard
+            key={product.id}
+            data={product}
+            type={type}
+            timeout={1000 * (index + 1)}
+          />
         ))}
       </ProductGrid>
     </PlanContainer>

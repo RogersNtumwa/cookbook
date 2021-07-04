@@ -6,15 +6,16 @@ export const data = [
       {
         interval: "month",
         currency: "aed",
-        unit_amount: 250,
+        unit_amount: 475,
       },
       {
         interval: "year",
         currency: "aed",
-        unit_amount: 200,
+        unit_amount: 1800,
       },
     ],
-    description: "Loremipsum, consectetur, adipiscingelit.",
+    description:
+      "# This is a product. IT IS VERY GREAT. # Loremipsum, consectetur, adipiscingelit. # This is a product. IT IS VERY GREAT. # ",
   },
   {
     id: 2,
@@ -28,7 +29,7 @@ export const data = [
       {
         interval: "year",
         currency: "aed",
-        unit_amount: 180,
+        unit_amount: 2000,
       },
     ],
     description:
@@ -46,7 +47,7 @@ export const data = [
       {
         interval: "year",
         currency: "aed",
-        unit_amount: 250,
+        unit_amount: 2500,
       },
     ],
     description: "Nunclacinia, justonon, nuncultricies, posuere",
