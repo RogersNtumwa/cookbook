@@ -13,6 +13,8 @@ import styled from "@emotion/styled";
 import Grow from "@material-ui/core/Grow";
 import { CardHeader } from "@material-ui/core";
 
+import CardPrice from "./CardPrice";
+
 const CardButton = styled(CardActions)({
   diplay: "flex",
   justifyContent: "center",
@@ -50,7 +52,16 @@ const ContentHead = styled.div({
   flexDirection: "column",
   alignItems: "center",
 });
-const ListChild = styled(ListItem)({ padding: "2px" });
+
+const CardTitle = styled(CardHeader)({
+  textAlign: "center",
+  background: "#edece8",
+});
+const ListChild = styled(ListItem)({ padding: "2px", fontSize: "12px" });
+const CardParagraphs = styled.div({
+  fontSize: "12px",
+  marginTop: ".5rem",
+});
 
 const useStyles = makeStyles({
   root: {
@@ -61,9 +72,10 @@ const useStyles = makeStyles({
     maxWidth: "10rem",
     marginRight: "10px",
     minHeight: "150px",
-    padding: "10px",
+    padding: "0",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     marginBottom: "10px",
+    borderRadius: "5px",
   },
 
   bullet: {
@@ -83,12 +95,24 @@ const PlanCard = ({ data, type, timeout }) => {
   const classes = useStyles();
   const price = data.prices.find((price) => price.interval === type);
 
-  const Descriptin_List = data.description.split(",");
+  const Description_List = data.description.split(",");
 
+  const index1 = data.description.indexOf("#");
+  const index2 = data.description.indexOf("#", index1 + 1);
+  let firtsParagraph = data.description.substring(index1 + 1, index2);
+
+  let index3 = data.description.indexOf("#", index2 + 1);
+  const index4 = data.description.indexOf("#", index3 + 1);
+  const SecondParagraph = data.description.substring(index3 + 1, index4);
+
+  const Para = [];
+  Description_List.map((item) => Para.push(item.split("#").pop()));
+
+  console.log(Para);
   return (
     <Grow in={true} timeout={timeout}>
       <Card className={classes.root} elevation={10}>
-        <CardHeader title={data.name} style={{ textAlign: "center" }} />
+        <CardTitle title={data.name} />
         <CardContent>
           <ContentHead>
             <Pricing component="div">
@@ -96,17 +120,15 @@ const PlanCard = ({ data, type, timeout }) => {
               <Price>{price.unit_amount}</Price>/<span>{type}</span>
             </Pricing>
             <Prepaid>
-              {type === "month" ? (
-                <span>"aed {price.unit_amount * 12} Pre-Paid Yearly"</span>
-              ) : (
-                <span>
-                  "aed {Math.ceil(price.unit_amount / 12)} Pre-Paid Monthly"
-                </span>
-              )}
+              <CardPrice data={data} type={type} />
             </Prepaid>
           </ContentHead>
+          <CardParagraphs>
+            <p>{firtsParagraph}</p>
+            <p>{SecondParagraph}</p>
+          </CardParagraphs>
           <List>
-            {Descriptin_List.map((item, index) => (
+            {Para.map((item, index) => (
               <ListChild key={index} style={{ padding: "2px" }}>
                 <CheckIcon />
                 <ListItemText primary={item} />

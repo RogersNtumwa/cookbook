@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import styled from "@emotion/styled";
 
-import switcContext from "../context/swicthcontext";
+import switcContext from "../context/SwitchContext";
 import { SWITCHPLAN } from "../context/Types";
 
 const AntSwitch = withStyles((theme) => ({
@@ -74,14 +74,13 @@ const SwitchBtn = () => {
           <Grid item>
             <Typography component="div">
               <Grid component="label" container alignItems="center" spacing={1}>
-                {type === "month" ? (
-                  <MonthlyPlan item month={type ? 1 : 0}>
-                    Monthly
-                  </MonthlyPlan>
+                {type === "year" ? (
+                  <YearPlan item year={type ? 1 : 0}>
+                    Annual
+                  </YearPlan>
                 ) : (
-                  <MonthlyPlan item>Monthly</MonthlyPlan>
+                  <YearPlan item>Annual</YearPlan>
                 )}
-
                 <Grid item>
                   <AntSwitch
                     checked={switchStata.isMonthlyPlan}
@@ -89,12 +88,13 @@ const SwitchBtn = () => {
                     onChange={(e) => dispatch({ type: SWITCHPLAN })}
                   />
                 </Grid>
-                {type === "year" ? (
-                  <YearPlan item year={type ? 1 : 0}>
-                    Annual
-                  </YearPlan>
+
+                {type === "month" ? (
+                  <MonthlyPlan item month={type ? 1 : 0}>
+                    Monthly
+                  </MonthlyPlan>
                 ) : (
-                  <YearPlan item>Annual</YearPlan>
+                  <MonthlyPlan item>Monthly</MonthlyPlan>
                 )}
               </Grid>
             </Typography>

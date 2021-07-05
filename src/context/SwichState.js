@@ -1,17 +1,19 @@
 import React, { useReducer } from "react";
 import SwicthReducer from "./Switchreducer";
-import switcContext from "./swicthcontext";
+import SwitchContext from "./SwitchContext";
 
 const SwichState = ({ children }) => {
+
   const initialState = {
     isMonthlyPlan: true,
     isAnnualPlan: false,
   };
+
   const [state, dispatch] = useReducer(SwicthReducer, initialState);
   const type = state.isMonthlyPlan ? "month" : "year";
   return (
     <div>
-      <switcContext.Provider
+      <SwitchContext.Provider
         value={{
           switchStata: state,
           type,
@@ -19,7 +21,7 @@ const SwichState = ({ children }) => {
         }}
       >
         {children}
-      </switcContext.Provider>
+      </SwitchContext.Provider>
     </div>
   );
 };

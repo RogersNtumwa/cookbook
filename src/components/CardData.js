@@ -15,7 +15,7 @@ export const data = [
       },
     ],
     description:
-      "# This is a product. IT IS VERY GREAT. # Loremipsum, consectetur, adipiscingelit. # This is a product. IT IS VERY GREAT. # ",
+      "#This is a product. IT IS VERY GREAT.# Loremipsum, consectetur,#This is a product. Awesome.# adipiscingelit.",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const data = [
       {
         interval: "month",
         currency: "aed",
-        unit_amount: 300,
+        unit_amount: 600,
       },
       {
         interval: "year",
@@ -33,7 +33,7 @@ export const data = [
       },
     ],
     description:
-      "Quisquefelisdui, aliquametbendum, faucibus, ultricies, quisnulla. ",
+      "Quisquefelisdui, #This is a product. IT IS VERY Good.# aliquametbendum, faucibus, # This is a product. IT IS VERY fantastic.# ultricies, quisnulla. ",
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ export const data = [
       {
         interval: "month",
         currency: "aed",
-        unit_amount: 350,
+        unit_amount: 850,
       },
       {
         interval: "year",
@@ -50,6 +50,7 @@ export const data = [
         unit_amount: 2500,
       },
     ],
-    description: "Nunclacinia, justonon, nuncultricies, posuere",
+    description:
+      "Nutrition, #This is a product. IT IS VERY nice.# aliquametbendum, faucibus, # This is a product. IT IS VERY delicious.# ultricies, quisnulla. ",
   },
 ];

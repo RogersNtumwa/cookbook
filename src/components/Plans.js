@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 import PlanCard from "./PlanCard";
 import Switch from "./Switch";
-import switcContext from "../context/swicthcontext";
+import SwitchContext from "../context/SwitchContext";
 import { data } from "./CardData";
 
 const ProductGrid = styled(Grid)({
@@ -21,7 +21,7 @@ const PlanContainer = styled.div({
 });
 
 const Plans = () => {
-  const { type } = useContext(switcContext);
+  const { type } = useContext(SwitchContext);
 
   return (
     <PlanContainer>

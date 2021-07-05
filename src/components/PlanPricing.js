@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Grid } from "@material-ui/core";
 
 import Plans from "./Plans";
-import SwichState from "../context/SwichState";
+import SwitchContext from "../context/SwichState";
 
 const StyledGrid = styled(Grid)({
   width: "100%",
@@ -16,7 +16,7 @@ const HeaderText = styled(Grid)({
 
 function PlanPricing() {
   return (
-    <SwichState>
+    <SwitchContext>
       <StyledGrid>
         <HeaderText>
           <h1>Plans & Pricing</h1>
@@ -24,7 +24,7 @@ function PlanPricing() {
         </HeaderText>
         <Plans />
       </StyledGrid>
-    </SwichState>
+    </SwitchContext>
   );
 }
 
