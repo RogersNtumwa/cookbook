@@ -35,16 +35,15 @@ const FormProvider = ({ children }) => {
       errorText: "",
       isValid: false,
     },
-    
   };
 
   const [state, dispatch] = useReducer(formReducer, initialState);
-  
 
   return (
     <FormContext.Provider
       value={{
         formData: state,
+       
         dispatch,
       }}
     >

@@ -18,6 +18,12 @@ function ConfirmPasswordField() {
         payload: "Passwords don't match",
       });
     }
+    if (value === "") {
+      dispatch({
+        type: CONFIRM_PASSWORD_ERROR,
+        payload: "Confirm password is required",
+      });
+    }
   }
 
   return (

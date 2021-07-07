@@ -12,6 +12,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import styled from "@emotion/styled";
 import Grow from "@material-ui/core/Grow";
 import { CardHeader } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import CardPrice from "./CardPrice";
 
@@ -92,6 +93,7 @@ const useStyles = makeStyles({
 });
 
 const PlanCard = ({ data, type, timeout }) => {
+  const history = useHistory();
   const classes = useStyles();
   const price = data.prices.find((price) => price.interval === type);
 
@@ -108,7 +110,11 @@ const PlanCard = ({ data, type, timeout }) => {
   const Para = [];
   Description_List.map((item) => Para.push(item.split("#").pop()));
 
-  console.log(Para);
+
+  const onClickHandle = () => {
+    history.push(`/subscription-form/${type}/${data.id}`);
+  };
+
   return (
     <Grow in={true} timeout={timeout}>
       <Card className={classes.root} elevation={10}>
@@ -137,7 +143,11 @@ const PlanCard = ({ data, type, timeout }) => {
           </List>
         </CardContent>
         <CardButton>
-          <ActionButton variant="contained" size="small">
+          <ActionButton
+            variant="contained"
+            size="small"
+            onClick={onClickHandle}
+          >
             Try Plan
           </ActionButton>
         </CardButton>

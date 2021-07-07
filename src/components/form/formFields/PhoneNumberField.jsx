@@ -17,9 +17,7 @@ function PhoneNumberField() {
         type: PHONENUMBER_ERROR,
         payload: "Phone Number is required",
       });
-    } else if (
-      /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.test(value)
-    ) {
+    } else if (/^([0-9]{3}-)?([0-9]{3})([0-9]{4})(\/[0-9]{4})?$/.test(value)) {
       dispatch({
         type: PHONENUMBER_ERROR,
         payload: "Invalid Phone Number from regx",

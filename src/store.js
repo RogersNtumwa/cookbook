@@ -9,6 +9,8 @@ import {
   addRecipeReducer,
 } from "./Reducers/recipe";
 
+import { productDetailsReducer } from "./Reducers/products";
+
 const middleware = [thunk];
 
 const initialState = {};
@@ -17,6 +19,7 @@ const reducer = combineReducers({
   recipes: recipeListReducer,
   recipe: recipeDetailsReducer,
   addRecipe: addRecipeReducer,
+  product: productDetailsReducer,
 });
 
 const store = createStore(

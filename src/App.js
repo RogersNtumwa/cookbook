@@ -4,8 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 
 import Main from "./components/Main";
-import FormProvider from "./components/form/context/FormState";
-import AddSubscriptionForm from "./components/form/formScreen/SubscriptionForm";
+// import FormProvider from "./components/form/context/FormState";
+// import AddSubscriptionForm from "./components/form/formScreen/SubscriptionForm";
 
 // const recipes = [
 //   {
@@ -22,14 +22,14 @@ import AddSubscriptionForm from "./components/form/formScreen/SubscriptionForm";
 
 function App() {
   return (
-    <Router>
-      <Container>
+    <Container>
+      <Router>
         <Main />
         {/* <FormProvider>
           <AddSubscriptionForm />
         </FormProvider> */}
-      </Container>
-    </Router>
+      </Router>
+    </Container>
   );
 }
 

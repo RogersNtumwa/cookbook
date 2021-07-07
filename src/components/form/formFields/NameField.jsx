@@ -14,10 +14,10 @@ function NameField() {
         payload: "Name is required",
       });
       return false;
-    } else if (value.length < 3) {
+    } else if (value.length < 3 || value.length > 30) {
       dispatch({
         type: NAME_ERROR,
-        payload: " Name should be atleast three characters long",
+        payload: " Name should be 3-30 characters long",
       });
       return false;
     } else if (!/^[a-zA-Z ]+$/.test(value)) {
