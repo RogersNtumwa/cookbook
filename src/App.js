@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+
 import Container from "@material-ui/core/Container";
 
 import Main from "./components/Main";
-
+import FormProvider from "./components/form/context/FormState";
+import AddSubscriptionForm from "./components/form/formScreen/SubscriptionForm";
 
 // const recipes = [
 //   {
@@ -23,6 +25,9 @@ function App() {
     <Router>
       <Container>
         <Main />
+        {/* <FormProvider>
+          <AddSubscriptionForm />
+        </FormProvider> */}
       </Container>
     </Router>
   );
