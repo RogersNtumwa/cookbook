@@ -5,6 +5,7 @@ import {
   ADD_PHONENUMBER,
   CLEAR_PHONENUMBER_FIELD,
   PHONENUMBER_ERROR,
+  VALID_PHONENUMBER_FIELD,
 } from "../context/Types";
 
 function PhoneNumberField() {
@@ -17,17 +18,24 @@ function PhoneNumberField() {
         type: PHONENUMBER_ERROR,
         payload: "Phone Number is required",
       });
+      return false;
     } else if (/^([0-9]{3}-)?([0-9]{3})([0-9]{4})(\/[0-9]{4})?$/.test(value)) {
       dispatch({
         type: PHONENUMBER_ERROR,
         payload: "Invalid Phone Number from regx",
       });
+      return false;
     } else if (value.length < 10) {
       dispatch({
         type: PHONENUMBER_ERROR,
         payload: "Invalid Phone Number",
       });
+      return false;
     }
+    dispatch({
+      type: VALID_PHONENUMBER_FIELD,
+    });
+    return true;
   }
 
   return (

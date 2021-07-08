@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { TextField } from "@material-ui/core";
 import { FormContext } from "../context/FormState";
-import { ADD_NAME, CLEAR_NAME_FIELD, NAME_ERROR } from "../context/Types";
+import {
+  ADD_NAME,
+  CLEAR_NAME_FIELD,
+  NAME_ERROR,
+  VALID_NAME_FIELD,
+} from "../context/Types";
 
 function NameField() {
   const { formData, dispatch } = useContext(FormContext);
@@ -26,8 +31,12 @@ function NameField() {
         payload: "Invalid Name. Avoid Special characters",
       });
       return false;
+    } else {
+      dispatch({
+        type: VALID_NAME_FIELD,
+      });
+      return true;
     }
-    return true;
   }
 
   return (

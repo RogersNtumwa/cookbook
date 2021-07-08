@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { TextField } from "@material-ui/core";
 import { FormContext } from "../context/FormState";
-import { ADD_EMAIL, CLEAR_EMAIL_FIELD, EMAIL_ERROR } from "../context/Types";
+import {
+  ADD_EMAIL,
+  CLEAR_EMAIL_FIELD,
+  EMAIL_ERROR,
+  VALID_EMAIL_FIELD,
+} from "../context/Types";
 
 function EmailField() {
   const { formData, dispatch } = useContext(FormContext);
@@ -20,8 +25,12 @@ function EmailField() {
         payload: "Email is not valid",
       });
       return false;
+    } else {
+      dispatch({
+        type: VALID_EMAIL_FIELD,
+      });
+      return true;
     }
-    return true;
   };
   return (
     <TextField

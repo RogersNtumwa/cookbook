@@ -5,6 +5,7 @@ import {
   ADD_PASSWORD,
   CLEAR_PASSWORD_FIELD,
   PASSWORD_ERROR,
+  VALID_PASSWORD_FIELD,
 } from "../context/Types";
 
 function PasswordField() {
@@ -16,12 +17,18 @@ function PasswordField() {
         type: PASSWORD_ERROR,
         payload: "Password is required",
       });
+      return false;
     } else if (value.indexOf(" ") >= 0) {
       dispatch({
         type: PASSWORD_ERROR,
         payload: "Password can't contain spaces",
       });
+      return false;
     }
+    dispatch({
+      type: VALID_PASSWORD_FIELD,
+    });
+    return true;
   }
   return (
     <TextField

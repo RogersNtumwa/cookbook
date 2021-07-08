@@ -55,6 +55,17 @@ function AddSubscriptionForm() {
   };
 
   const { name, email, phoneNumber, password, confirmPassword } = formData;
+  let disabled = true;
+
+  if (
+    name.isValid &&
+    email.isValid &&
+    phoneNumber.isValid &&
+    password.isValid &&
+    confirmPassword.isValid
+  ) {
+    disabled = false;
+  }
   function isValidForm() {
     const test = {};
     test.name = name.value ? "" : name.isValid;
@@ -77,17 +88,17 @@ function AddSubscriptionForm() {
           <PhoneNumberField />
           <PasswordField />
           <ConfirmPasswordField />
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" disabled={disabled}>
             Submit
           </Button>
         </form>
         {!loading && (
           <Fragment>
-            <p>{product.id}</p>
-            <p>{product.name}</p>
-            <p>{prices.currency}</p>
-            <p>{prices.interval}</p>
-            <p>{prices.unit_amount}</p>
+            <p>ID: {product.id}</p>
+            <p>PlanName: {product.name}</p>
+            <p>Currency: {prices.currency}</p>
+            <p>Interval: {prices.interval}</p>
+            <p>Amount: {prices.unit_amount}</p>
           </Fragment>
         )}
       </StyledPaper>

@@ -5,6 +5,7 @@ import {
   ADD_CONFIRM_PASSWORD,
   CLEAR_CONFIRMPASSWORD_FIELD,
   CONFIRM_PASSWORD_ERROR,
+  VALID_CONFIRMPASSWORD_FIELD,
 } from "../context/Types";
 
 function ConfirmPasswordField() {
@@ -17,12 +18,17 @@ function ConfirmPasswordField() {
         type: CONFIRM_PASSWORD_ERROR,
         payload: "Passwords don't match",
       });
-    }
-    if (value === "") {
+      return false;
+    } else if (value === "") {
       dispatch({
         type: CONFIRM_PASSWORD_ERROR,
         payload: "Confirm password is required",
       });
+    } else {
+      dispatch({
+        type: VALID_CONFIRMPASSWORD_FIELD,
+      });
+      return true;
     }
   }
 

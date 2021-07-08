@@ -15,6 +15,11 @@ import {
   CLEAR_PASSWORD_FIELD,
   CLEAR_PHONENUMBER_FIELD,
   CLEAR_FIELDS,
+  VALID_NAME_FIELD,
+  VALID_EMAIL_FIELD,
+  VALID_PHONENUMBER_FIELD,
+  VALID_PASSWORD_FIELD,
+  VALID_CONFIRMPASSWORD_FIELD,
 } from "../context/Types";
 
 const formReducer = (state, action) => {
@@ -26,7 +31,6 @@ const formReducer = (state, action) => {
         name: {
           ...state.name,
           value: action.payload,
-          isValid: true,
         },
       };
     case NAME_ERROR:
@@ -39,6 +43,14 @@ const formReducer = (state, action) => {
         },
       };
 
+    case VALID_NAME_FIELD:
+      return {
+        ...state,
+        name: {
+          ...state.name,
+          isValid: true,
+        },
+      };
     case CLEAR_NAME_FIELD:
       return {
         ...state,
@@ -46,7 +58,6 @@ const formReducer = (state, action) => {
           ...state.name,
           error: false,
           errorText: "",
-          isValid: false,
         },
       };
 
@@ -57,7 +68,6 @@ const formReducer = (state, action) => {
         email: {
           ...state.email,
           value: action.payload,
-          isValid: true,
         },
       };
     case EMAIL_ERROR:
@@ -69,6 +79,14 @@ const formReducer = (state, action) => {
           errorText: action.payload,
         },
       };
+    case VALID_EMAIL_FIELD:
+      return {
+        ...state,
+        email: {
+          ...state.email,
+          isValid: true,
+        },
+      };
     case CLEAR_EMAIL_FIELD:
       return {
         ...state,
@@ -76,7 +94,6 @@ const formReducer = (state, action) => {
           ...state.email,
           error: false,
           errorText: "",
-          isValid: false,
         },
       };
     // phone number field
@@ -86,7 +103,6 @@ const formReducer = (state, action) => {
         phoneNumber: {
           ...state.phoneNumber,
           value: action.payload,
-          isValid: true,
         },
       };
     case PHONENUMBER_ERROR:
@@ -98,6 +114,16 @@ const formReducer = (state, action) => {
           errorText: action.payload,
         },
       };
+
+    case VALID_PHONENUMBER_FIELD:
+      return {
+        ...state,
+        phoneNumber: {
+          ...state.phoneNumber,
+
+          isValid: true,
+        },
+      };
     case CLEAR_PHONENUMBER_FIELD:
       return {
         ...state,
@@ -105,7 +131,6 @@ const formReducer = (state, action) => {
           ...state.phoneNumber,
           error: false,
           errorText: "",
-          isValid: false,
         },
       };
 
@@ -116,7 +141,6 @@ const formReducer = (state, action) => {
         password: {
           ...state.password,
           value: action.payload,
-          isValid: true,
         },
       };
     case PASSWORD_ERROR:
@@ -128,6 +152,16 @@ const formReducer = (state, action) => {
           errorText: action.payload,
         },
       };
+
+    case VALID_PASSWORD_FIELD:
+      return {
+        ...state,
+        password: {
+          ...state.password,
+
+          isValid: true,
+        },
+      };
     case CLEAR_PASSWORD_FIELD:
       return {
         ...state,
@@ -135,7 +169,6 @@ const formReducer = (state, action) => {
           ...state.password,
           error: false,
           errorText: "",
-          isValid: false,
         },
       };
 
@@ -146,7 +179,6 @@ const formReducer = (state, action) => {
         confirmPassword: {
           ...state.confirmPassword,
           value: action.payload,
-          isValid: true,
         },
       };
     case CONFIRM_PASSWORD_ERROR:
@@ -158,6 +190,15 @@ const formReducer = (state, action) => {
           errorText: action.payload,
         },
       };
+
+    case VALID_CONFIRMPASSWORD_FIELD:
+      return {
+        ...state,
+        confirmPassword: {
+          ...state.confirmPassword,
+          isValid: true,
+        },
+      };
     case CLEAR_CONFIRMPASSWORD_FIELD:
       return {
         ...state,
@@ -165,7 +206,6 @@ const formReducer = (state, action) => {
           ...state.confirmPassword,
           error: false,
           errorText: "",
-          isValid: false,
         },
       };
 
