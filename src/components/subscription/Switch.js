@@ -7,8 +7,8 @@ import { Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import styled from "@emotion/styled";
 
-import switcContext from "../context/SwitchContext";
-import { SWITCHPLAN } from "../context/Types";
+import switcContext from "./context/SwitchContext";
+import { SWITCHPLAN } from "./context/Types";
 
 const AntSwitch = withStyles((theme) => ({
   root: {

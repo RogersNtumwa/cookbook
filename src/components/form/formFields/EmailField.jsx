@@ -5,33 +5,35 @@ import {
   ADD_EMAIL,
   CLEAR_EMAIL_FIELD,
   EMAIL_ERROR,
-  VALID_EMAIL_FIELD,
+  VALID_EMAIL,
 } from "../context/Types";
+
+function isValidEmail(value) {
+  if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function EmailField() {
   const { formData, dispatch } = useContext(FormContext);
   const { email } = formData;
 
-  const isValidEmail = (value) => {
-    if (value === "") {
+  function onBlur(event) {
+    const value = event.target.value;
+    const valid = isValidEmail(value);
+    if (!valid) {
       dispatch({
         type: EMAIL_ERROR,
-        payload: "Email is required",
       });
-      return false;
-    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
-      dispatch({
-        type: EMAIL_ERROR,
-        payload: "Email is not valid",
-      });
-      return false;
     } else {
       dispatch({
-        type: VALID_EMAIL_FIELD,
+        type: VALID_EMAIL,
       });
-      return true;
     }
-  };
+  }
+
   return (
     <TextField
       fullWidth
@@ -49,7 +51,7 @@ function EmailField() {
           payload: e.target.value,
         });
       }}
-      onBlur={(e) => isValidEmail(e.target.value)}
+      onBlur={(event) => onBlur(event)}
       onFocus={(e) => {
         dispatch({
           type: CLEAR_EMAIL_FIELD,

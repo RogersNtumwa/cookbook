@@ -5,37 +5,37 @@ import {
   ADD_PHONENUMBER,
   CLEAR_PHONENUMBER_FIELD,
   PHONENUMBER_ERROR,
-  VALID_PHONENUMBER_FIELD,
+  VALID_PHONENUMBER,
 } from "../context/Types";
+
+function isValidPhoneNumber(value) {
+  if (
+    value === "" ||
+    value.length < 10 ||
+    /^([0-9]{3}-)?([0-9]{3})([0-9]{4})(\/[0-9]{4})?$/.test(value)
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function PhoneNumberField() {
   const { formData, dispatch } = useContext(FormContext);
   const { phoneNumber } = formData;
 
-  function isValidNumber(value) {
-    if (value === "") {
+  function onBlur(event) {
+    const value = event.target.value;
+    const valid = isValidPhoneNumber(value);
+    if (!valid) {
       dispatch({
         type: PHONENUMBER_ERROR,
-        payload: "Phone Number is required",
       });
-      return false;
-    } else if (/^([0-9]{3}-)?([0-9]{3})([0-9]{4})(\/[0-9]{4})?$/.test(value)) {
+    } else {
       dispatch({
-        type: PHONENUMBER_ERROR,
-        payload: "Invalid Phone Number from regx",
+        type: VALID_PHONENUMBER,
       });
-      return false;
-    } else if (value.length < 10) {
-      dispatch({
-        type: PHONENUMBER_ERROR,
-        payload: "Invalid Phone Number",
-      });
-      return false;
     }
-    dispatch({
-      type: VALID_PHONENUMBER_FIELD,
-    });
-    return true;
   }
 
   return (
@@ -55,7 +55,7 @@ function PhoneNumberField() {
           payload: e.target.value,
         });
       }}
-      onBlur={(e) => isValidNumber(e.target.value)}
+      onBlur={(event) => onBlur(event)}
       onFocus={(e) => {
         dispatch({
           type: CLEAR_PHONENUMBER_FIELD,

@@ -5,37 +5,37 @@ import {
   ADD_NAME,
   CLEAR_NAME_FIELD,
   NAME_ERROR,
-  VALID_NAME_FIELD,
+  VALID_NAME,
 } from "../context/Types";
+
+function isValidName(value) {
+  if (
+    value === "" ||
+    value.length < 3 ||
+    value.length > 30 ||
+    !/^[a-zA-Z ]+$/.test(value)
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function NameField() {
   const { formData, dispatch } = useContext(FormContext);
-
   const { name } = formData;
-  function isValidName(value) {
-    if (value === "") {
+
+  function onBlur(event) {
+    const value = event.target.value;
+    const valid = isValidName(value);
+    if (!valid) {
       dispatch({
         type: NAME_ERROR,
-        payload: "Name is required",
       });
-      return false;
-    } else if (value.length < 3 || value.length > 30) {
-      dispatch({
-        type: NAME_ERROR,
-        payload: " Name should be 3-30 characters long",
-      });
-      return false;
-    } else if (!/^[a-zA-Z ]+$/.test(value)) {
-      dispatch({
-        type: NAME_ERROR,
-        payload: "Invalid Name. Avoid Special characters",
-      });
-      return false;
     } else {
       dispatch({
-        type: VALID_NAME_FIELD,
+        type: VALID_NAME,
       });
-      return true;
     }
   }
 
@@ -56,7 +56,7 @@ function NameField() {
           payload: e.target.value,
         });
       }}
-      onBlur={(e) => isValidName(e.target.value)}
+      onBlur={(event) => onBlur(event)}
       onFocus={(e) => {
         dispatch({
           type: CLEAR_NAME_FIELD,

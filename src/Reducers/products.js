@@ -1,25 +1,24 @@
 import {
-  PRODUCT_DETAILS_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
+  PRODUCTS_FAIL,
+  PRODUCTS_REQUEST,
+  PRODUCTS_SUCCESS,
 } from "../actions/type";
 
-
 export const productDetailsReducer = (
-  state = { product: {}, loading: true },
+  state = { products: [], loading: true },
   action
 ) => {
   const { type, payload } = action;
 
   switch (type) {
-    case PRODUCT_DETAILS_REQUEST:
+    case PRODUCTS_REQUEST:
       return { loading: true, ...state };
-    case PRODUCT_DETAILS_SUCCESS:
+    case PRODUCTS_SUCCESS:
       return {
-        product: payload,
+        products: payload,
         loading: false,
       };
-    case PRODUCT_DETAILS_FAIL:
+    case PRODUCTS_FAIL:
       return {
         loading: false,
         error: payload,

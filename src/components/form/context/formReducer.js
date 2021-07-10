@@ -9,17 +9,17 @@ import {
   PASSWORD_ERROR,
   PHONENUMBER_ERROR,
   CONFIRM_PASSWORD_ERROR,
+  VALID_CONFIRMPASSWORD,
+  VALID_EMAIL,
+  VALID_NAME,
+  VALID_PASSWORD,
+  VALID_PHONENUMBER,
   CLEAR_CONFIRMPASSWORD_FIELD,
   CLEAR_NAME_FIELD,
   CLEAR_EMAIL_FIELD,
   CLEAR_PASSWORD_FIELD,
   CLEAR_PHONENUMBER_FIELD,
   CLEAR_FIELDS,
-  VALID_NAME_FIELD,
-  VALID_EMAIL_FIELD,
-  VALID_PHONENUMBER_FIELD,
-  VALID_PASSWORD_FIELD,
-  VALID_CONFIRMPASSWORD_FIELD,
 } from "../context/Types";
 
 const formReducer = (state, action) => {
@@ -39,18 +39,10 @@ const formReducer = (state, action) => {
         name: {
           ...state.name,
           error: true,
-          errorText: action.payload,
+          errorText: "Name is invalid",
         },
       };
 
-    case VALID_NAME_FIELD:
-      return {
-        ...state,
-        name: {
-          ...state.name,
-          isValid: true,
-        },
-      };
     case CLEAR_NAME_FIELD:
       return {
         ...state,
@@ -58,6 +50,15 @@ const formReducer = (state, action) => {
           ...state.name,
           error: false,
           errorText: "",
+        },
+      };
+
+    case VALID_NAME:
+      return {
+        ...state,
+        name: {
+          ...state.name,
+          isValid: true,
         },
       };
 
@@ -76,10 +77,11 @@ const formReducer = (state, action) => {
         email: {
           ...state.email,
           error: true,
-          errorText: action.payload,
+          errorText: "Email is invalid",
         },
       };
-    case VALID_EMAIL_FIELD:
+
+    case VALID_EMAIL:
       return {
         ...state,
         email: {
@@ -87,6 +89,7 @@ const formReducer = (state, action) => {
           isValid: true,
         },
       };
+
     case CLEAR_EMAIL_FIELD:
       return {
         ...state,
@@ -111,11 +114,10 @@ const formReducer = (state, action) => {
         phoneNumber: {
           ...state.phoneNumber,
           error: true,
-          errorText: action.payload,
+          errorText: "Invalid phone Number",
         },
       };
-
-    case VALID_PHONENUMBER_FIELD:
+    case VALID_PHONENUMBER:
       return {
         ...state,
         phoneNumber: {
@@ -149,11 +151,10 @@ const formReducer = (state, action) => {
         password: {
           ...state.password,
           error: true,
-          errorText: action.payload,
+          errorText: "Invalid password",
         },
       };
-
-    case VALID_PASSWORD_FIELD:
+    case VALID_PASSWORD:
       return {
         ...state,
         password: {
@@ -162,6 +163,7 @@ const formReducer = (state, action) => {
           isValid: true,
         },
       };
+
     case CLEAR_PASSWORD_FIELD:
       return {
         ...state,
@@ -187,11 +189,11 @@ const formReducer = (state, action) => {
         confirmPassword: {
           ...state.confirmPassword,
           error: true,
-          errorText: action.payload,
+          errorText: "passwords don't match",
         },
       };
 
-    case VALID_CONFIRMPASSWORD_FIELD:
+    case VALID_CONFIRMPASSWORD:
       return {
         ...state,
         confirmPassword: {
@@ -199,6 +201,7 @@ const formReducer = (state, action) => {
           isValid: true,
         },
       };
+
     case CLEAR_CONFIRMPASSWORD_FIELD:
       return {
         ...state,

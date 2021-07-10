@@ -5,31 +5,35 @@ import {
   ADD_PASSWORD,
   CLEAR_PASSWORD_FIELD,
   PASSWORD_ERROR,
-  VALID_PASSWORD_FIELD,
+  VALID_PASSWORD,
 } from "../context/Types";
+
+function isValidPassword(value) {
+  if (value === "" || value.indexOf(" ") >= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function PasswordField() {
   const { formData, dispatch } = useContext(FormContext);
   const { password } = formData;
-  function isValidPassword(value) {
-    if (value === "") {
+
+  function onBlur(event) {
+    const value = event.target.value;
+    const valid = isValidPassword(value);
+    if (!valid) {
       dispatch({
         type: PASSWORD_ERROR,
-        payload: "Password is required",
       });
-      return false;
-    } else if (value.indexOf(" ") >= 0) {
+    } else {
       dispatch({
-        type: PASSWORD_ERROR,
-        payload: "Password can't contain spaces",
+        type: VALID_PASSWORD,
       });
-      return false;
     }
-    dispatch({
-      type: VALID_PASSWORD_FIELD,
-    });
-    return true;
   }
+
   return (
     <TextField
       fullWidth
@@ -47,7 +51,7 @@ function PasswordField() {
           payload: e.target.value,
         });
       }}
-      onBlur={(e) => isValidPassword(e.target.value)}
+      onBlur={(event) => onBlur(event)}
       onFocus={(e) => {
         dispatch({
           type: CLEAR_PASSWORD_FIELD,

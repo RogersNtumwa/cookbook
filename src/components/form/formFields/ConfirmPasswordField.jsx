@@ -5,30 +5,31 @@ import {
   ADD_CONFIRM_PASSWORD,
   CLEAR_CONFIRMPASSWORD_FIELD,
   CONFIRM_PASSWORD_ERROR,
-  VALID_CONFIRMPASSWORD_FIELD,
+  VALID_CONFIRMPASSWORD,
 } from "../context/Types";
+
+function passwordsMatch(value, password) {
+  if (value !== password.value) {
+    return false;
+  }
+  return true;
+}
 
 function ConfirmPasswordField() {
   const { formData, dispatch } = useContext(FormContext);
   const { confirmPassword, password } = formData;
 
-  function passwordsMatch(value) {
-    if (value !== password.value) {
+  function onBlur(event) {
+    const value = event.target.value;
+    const valid = passwordsMatch(value, password);
+    if (!valid) {
       dispatch({
         type: CONFIRM_PASSWORD_ERROR,
-        payload: "Passwords don't match",
-      });
-      return false;
-    } else if (value === "") {
-      dispatch({
-        type: CONFIRM_PASSWORD_ERROR,
-        payload: "Confirm password is required",
       });
     } else {
       dispatch({
-        type: VALID_CONFIRMPASSWORD_FIELD,
+        type: VALID_CONFIRMPASSWORD,
       });
-      return true;
     }
   }
 
@@ -49,7 +50,7 @@ function ConfirmPasswordField() {
           payload: e.target.value,
         });
       }}
-      onBlur={(e) => passwordsMatch(e.target.value)}
+      onBlur={(event) => onBlur(event)}
       onFocus={(e) => {
         dispatch({
           type: CLEAR_CONFIRMPASSWORD_FIELD,

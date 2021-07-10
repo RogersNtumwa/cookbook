@@ -1,22 +1,18 @@
-import {
-  PRODUCT_DETAILS_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-} from "./type";
-import { data } from "../components/CardData";
+import { PRODUCTS_FAIL, PRODUCTS_REQUEST, PRODUCTS_SUCCESS } from "./type";
+import { data } from "../components/subscription/CardData";
 
-export const getProduct = (id) => async (dispatch) => {
-  dispatch({ type: PRODUCT_DETAILS_REQUEST });
+export const getProducts = () => async (dispatch) => {
+  dispatch({ type: PRODUCTS_REQUEST });
 
   try {
-    const response = await data.find((product) => product.id === id);
+    const response = await data;
     dispatch({
-      type: PRODUCT_DETAILS_SUCCESS,
+      type: PRODUCTS_SUCCESS,
       payload: response,
     });
   } catch (error) {
     dispatch({
-      type: PRODUCT_DETAILS_FAIL,
+      type: PRODUCTS_FAIL,
     });
   }
 };

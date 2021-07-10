@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 
 import PlanCard from "./PlanCard";
 import Switch from "./Switch";
-import SwitchContext from "../context/SwitchContext";
-import { data } from "./CardData";
+import SwitchContext from "./context/SwitchContext";
+import Spinner from "./Spinner";
 
 const ProductGrid = styled(Grid)({
   display: "flex",
@@ -20,21 +20,25 @@ const PlanContainer = styled.div({
   flexDirection: "column",
 });
 
-const Plans = () => {
+const Plans = ({ products, loading }) => {
   const { type } = useContext(SwitchContext);
 
   return (
     <PlanContainer>
       <Switch />
       <ProductGrid>
-        {data.map((product, index) => (
-          <PlanCard
-            key={product.id}
-            data={product}
-            type={type}
-            timeout={1000 * (index + 1)}
-          />
-        ))}
+        {loading ? (
+          <Spinner />
+        ) : (
+          products.map((product, index) => (
+            <PlanCard
+              key={product.id}
+              data={product}
+              type={type}
+              timeout={1000 * (index + 1)}
+            />
+          ))
+        )}
       </ProductGrid>
     </PlanContainer>
   );

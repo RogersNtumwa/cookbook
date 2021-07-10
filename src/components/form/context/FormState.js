@@ -38,12 +38,12 @@ const FormProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(formReducer, initialState);
+  // const { name, email, phoneNumber, password, confirmPassword } = state;
 
   return (
     <FormContext.Provider
       value={{
         formData: state,
-       
         dispatch,
       }}
     >
