@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import Typography from "@material-ui/core/Typography";
 
@@ -56,12 +56,12 @@ const CardPrice = ({ type, data }) => {
       <Prepaid>
         <Price>
           {type === "month" ? (
-            <>
+            <Fragment>
               <span>"aed {Annualpay} Pre-Paid Yearly"</span>
               <span>
                 SAVE aed {Annualpay - Monthly_save.unit_amount} with a Year plan
               </span>
-            </>
+            </Fragment>
           ) : (
             <span>"aed {MonthPay} Pre-Paid Monthly"</span>
           )}
