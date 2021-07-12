@@ -58,7 +58,7 @@ const formReducer = (state, action) => {
         ...state,
         name: {
           ...state.name,
-          isValid: true,
+          valid: true,
         },
       };
 
@@ -86,7 +86,7 @@ const formReducer = (state, action) => {
         ...state,
         email: {
           ...state.email,
-          isValid: true,
+          valid: true,
         },
       };
 
@@ -122,8 +122,7 @@ const formReducer = (state, action) => {
         ...state,
         phoneNumber: {
           ...state.phoneNumber,
-
-          isValid: true,
+          valid: true,
         },
       };
     case CLEAR_PHONENUMBER_FIELD:
@@ -159,8 +158,7 @@ const formReducer = (state, action) => {
         ...state,
         password: {
           ...state.password,
-
-          isValid: true,
+          valid: true,
         },
       };
 
@@ -198,7 +196,7 @@ const formReducer = (state, action) => {
         ...state,
         confirmPassword: {
           ...state.confirmPassword,
-          isValid: true,
+          valid: true,
         },
       };
 
